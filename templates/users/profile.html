@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="col d-flex justify-content-center">        
+            <form action={% url "profile" %} method="POST">
+                {% if form.non_field_errors %} 
+                    <p>{{ form.non_field_errors }}</p> 
+                {% endif %}
+                {% csrf_token %}
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="id_email_login" class="form-label">Логин почты:</label>
+                        <input type="text" name="email_login" 
+                        value="{% if form.email_login.value %}{{ form.email_login.value }}{% endif %}" 
+                        autofocus autocapitalize="none" 
+                        autocomplete="email_login" 
+                        maxlength="150" 
+                        required id="id_email_login" 
+                        class="form-control"
+                        placeholder="Введите логин почты" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email_password" class="form-label">Пароль почты:</label>
+                        <input type="password" 
+                        name="email_password" 
+                        autocomplete="current-email_password" 
+                        required id="id_email_password" 
+                        class="form-control"
+                        placeholder="Введите пароль почты" required>
+                    </div>
+                <button type="submit"
+                    class="btn btn-dark btn-block">Отправить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
